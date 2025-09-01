@@ -7,14 +7,17 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
   <style>
+    /* ====== Reset ====== */
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
+    /* ====== Body ====== */
     body {
       display:flex; justify-content:center; align-items:center; height:100vh;
       background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") no-repeat center center/cover;
       backdrop-filter:blur(6px);
     }
 
+    /* ====== Container ====== */
     .container {
       position:relative; width:900px; max-width:95%; height:560px;
       background:rgba(255,255,255,0.95); border-radius:20px; overflow:hidden;
@@ -22,55 +25,92 @@
       display:flex;
     }
 
+    /* ====== Form box ====== */
     .form-box {
       position:absolute; top:0; width:50%; height:100%;
       display:flex; flex-direction:column; justify-content:center; align-items:center;
-      padding:40px; transition:0.6s ease-in-out;
+      padding:50px; transition:0.6s ease-in-out;
     }
 
-    .form-box h2 { font-size:28px; font-weight:600; margin-bottom:20px; color:#222; }
+    .form-box h2 {
+      font-size:30px; font-weight:600; margin-bottom:25px; color:#222;
+    }
 
-    .input-box { position:relative; width:100%; margin:12px 0; }
+    /* ====== Input box ====== */
+    .input-box {
+      position:relative; width:100%; margin:15px 0;
+    }
+
     .input-box input {
       width:100%; padding:14px 45px 14px 18px;
       border:1px solid #ddd; border-radius:10px;
-      font-size:15px; background:#f9f9f9; transition:0.3s;
+      font-size:16px; background:#f9f9f9; transition:0.3s;
     }
-    .input-box input:focus { border-color:#6a11cb; background:#fff; }
+
+    .input-box input:focus {
+      border-color:#6a11cb; box-shadow:0 0 6px rgba(106,17,203,0.4);
+      background:#fff;
+    }
 
     .input-box i {
       position:absolute; right:15px; top:50%; transform:translateY(-50%);
       color:#666; font-size:20px;
     }
 
+    /* ====== Buttons ====== */
     .btn {
-      width:100%; padding:12px; border:none; border-radius:10px;
+      width:100%; padding:14px; border:none; border-radius:10px;
       background:linear-gradient(135deg,#6a11cb,#2575fc);
-      color:#fff; font-size:16px; cursor:pointer; font-weight:500;
+      color:#fff; font-size:17px; cursor:pointer; font-weight:500;
       margin-top:15px; transition:all 0.3s ease;
     }
-    .btn:hover { opacity:0.9; }
 
-    .forgot-password { margin-top:10px; font-size:14px; text-align:center; }
-    .forgot-password a { color:#6a11cb; text-decoration:none; }
-    .forgot-password a:hover { text-decoration:underline; }
+    .btn:hover { opacity:0.9; transform:translateY(-2px); }
 
+    /* ====== Forgot password link ====== */
+    .forgot-password {
+      margin-top:12px;
+      font-size:14px;
+      text-align:center;
+    }
+
+    .forgot-password a {
+      color:#6a11cb;
+      text-decoration:none;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .forgot-password a:hover {
+      color:#2575fc;
+      text-decoration:underline;
+    }
+
+    /* ====== Toggle Panel ====== */
     .toggle-box {
       position:absolute; top:0; right:0; width:50%; height:100%;
       background:linear-gradient(135deg,#6a11cb,#2575fc);
       color:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center;
-      text-align:center; padding:40px; transition:0.6s ease-in-out;
+      text-align:center; padding:50px; transition:0.6s ease-in-out;
     }
-    .toggle-box h2 { font-size:26px; margin-bottom:10px; }
-    .toggle-box p { margin-bottom:20px; font-size:14px; }
+
+    .toggle-box h2 {
+      font-size:30px; font-weight:600; margin-bottom:10px;
+    }
+
+    .toggle-box p {
+      margin-bottom:25px; font-size:15px; line-height:1.6; max-width:280px;
+    }
 
     .toggle-box button {
       background:transparent; border:2px solid #fff; color:#fff;
-      padding:8px 24px; border-radius:30px; cursor:pointer;
-      font-size:14px; transition:0.3s;
+      padding:10px 28px; border-radius:30px; cursor:pointer;
+      font-size:15px; font-weight:500; transition:0.3s;
     }
+
     .toggle-box button:hover { background:#fff; color:#6a11cb; }
 
+    /* ====== Animations ====== */
     .container.active .signin-box { transform:translateX(100%); opacity:0; z-index:1; }
     .container.active .signup-box { transform:translateX(100%); opacity:1; z-index:2; }
     .container.active .toggle-box { transform:translateX(-100%); }
@@ -78,9 +118,11 @@
     .signin-box { left:0; opacity:1; z-index:2; }
     .signup-box { left:0; opacity:0; z-index:1; }
 
+    /* ====== Responsive ====== */
     @media(max-width:768px){
       .container{flex-direction:column;width:95%;height:auto;}
       .form-box, .toggle-box{position:relative;width:100%;height:auto;transform:none!important;}
+      .toggle-box{padding:30px;}
     }
   </style>
 </head>
@@ -132,10 +174,10 @@
     <!-- Toggle -->
     <div class="toggle-box" id="toggleBox">
       <h2>Hello, Friend!</h2>
-      <p>Create an account and enjoy full access</p>
+      <p>Create an account with your personal details and enjoy full access</p>
       <button id="signupBtn">Sign Up</button>
-      <h2 style="margin-top:30px;">Welcome Back!</h2>
-      <p>Login with your account</p>
+      <h2 style="margin-top:40px;">Welcome Back!</h2>
+      <p>Login with your registered account details</p>
       <button id="signinBtn">Sign In</button>
     </div>
   </div>
@@ -175,16 +217,20 @@
       const password = document.getElementById('loginPassword').value;
 
       let users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(u => u.email === email && u.password === password);
+      const user = users.find(u => u.email === email);
 
       if(!user){
-        alert("Invalid email or password!");
+        alert("User not registered!");
+        return;
+      }
+      if(user.password !== password){
+        alert("Wrong password!");
         return;
       }
 
       localStorage.setItem("loggedInUser", JSON.stringify(user));
       alert("Login successful!");
-      window.location.href = "index.html"; // redirect after login
+      window.location.href = "index.html";
     }
   </script>
 </body>
