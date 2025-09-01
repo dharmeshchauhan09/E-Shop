@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logging Out...</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .logout-container {
+      text-align: center;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      margin-top: 15%;
+    }
+
+    .logout-container h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .logout-container p {
+      color: #555;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-container">
+    <h1>Logging Out...</h1>
+    <p>Please wait while we log you out.</p>
+  </div>
+
+  <script>
+    function logout() {
+      // Clear local storage/session data
+      localStorage.removeItem("user");      // If you're storing user data under "user"
+      sessionStorage.clear();               // Optional: clear session data
+      localStorage.removeItem("isLoggedIn");// Or any other login keys
+
+      // Redirect to login page after 1 second (to simulate the logout process)
+      setTimeout(() => {
+        window.location.href = "login.html"; // Ensure you're redirecting to login page
+      }, 1000); // 1 second delay for better user experience
+    }
+
+    // Run the logout function after a brief delay to show the message
+    setTimeout(() => {
+      logout();
+    }, 2000); // wait 2 seconds before executing logout function
+  </script>
+</body>
+</html>

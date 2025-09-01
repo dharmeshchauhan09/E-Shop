@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - E-Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #ffc107;
+    }
+
+    /* About Section */
+    .about-section {
+      position: relative;
+      background: url('about.jpg') center/cover no-repeat;
+      padding: 80px 20px;
+    }
+
+    .about-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #1e88e5;
+      text-align: center;
+    }
+
+    .highlight {
+      color: #ff5722;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #1e88e5;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 26px;
+      }
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <section class="about-section">
+    <div class="container">
+      <h1>About <span class="highlight">E-Store</span></h1>
+      <p>
+        Welcome to <strong>E-Store</strong> — your ultimate online shopping destination.
+        We offer a wide range of products including <em>electronics, fashion, home essentials, beauty, and accessories</em>.
+        Our mission is to make high-quality products accessible and affordable for everyone.
+      </p>
+      <p>
+        At E-Store, we believe in <strong>customer satisfaction</strong>. Our platform is designed with user-friendly
+        navigation, secure payment systems, and fast delivery services. We continuously update our catalog to bring you the latest trends.
+      </p>
+      <p><strong>Why shop with us?</strong></p>
+      <ul>
+        <li>✔ Wide product variety</li>
+        <li>✔ Fast and reliable shipping</li>
+        <li>✔ Easy returns & refunds</li>
+        <li>✔ 24/7 customer support</li>
+      </ul>
+      <p>
+        Thank you for choosing E-Store. We’re honored to be part of your shopping journey!
+      </p>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="index.js"></script>
+</body>
+</html>

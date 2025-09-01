@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("pyment.jpg") center/cover no-repeat;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #232f3e;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    header img {
+      max-height: 60px;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .payment-box {
+      background: #fff;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    .payment-box img {
+      width: 200px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+    .payment-box h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #111827;
+    }
+    .payment-box p {
+      font-size: 1.2rem;
+      color: #374151;
+      margin: 10px 0;
+    }
+    .payment-box .highlight {
+      font-weight: bold;
+      color: #ef8f00;
+    }
+    .payment-methods {
+      text-align: left;
+      margin: 20px 0;
+    }
+    .payment-methods label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .payment-methods input {
+      margin-right: 8px;
+    }
+    .btn-confirm {
+      margin-top: 20px;
+      background-color: #febd69;
+      color: #232f3e;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 1rem;
+    }
+    .btn-confirm:hover {
+      background-color: #ff9900;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <!-- Replace with your actual logo path -->
+  <!-- <header>
+    <img src="assets/images/logo.png" alt="Website Logo" />
+  </header> -->
+
+  <main>
+    <div class="payment-box" id="paymentBox">
+      <!-- JavaScript will inject product + form here -->
+    </div>
+  </main>
+
+  <script>
+    // Same products array again:
+    const products = [
+      { id: 1, name: "Wireless Headphones", price: 1999, description: "High quality wireless headphones with noise cancellation and 20 hours battery life.", category: "Electronics", brand: "SoundPro", image: "Bluetooth Headphones.webp" },
+      { id: 2, name: "Winter Jacket", price: 1499, description: "Warm and stylish winter jacket, perfect for cold weather.", category: "Clothing", brand: "NorthWind", image: "Winter Jacket.jpg" },
+      { id: 3, name: "Kitchen Blender", price: 999, description: "Powerful blender for smoothies, soups, and more.", category: "Home Appliance", brand: "BlendMaster", image: "Kitchen Blender.jpg" },
+      { id: 4, name: "Skin Care Kit", price: 299, description: "Complete skin care kit with cleanser, moisturizer, and sunscreen.", category: "Beauty", brand: "CarePro", image: "Skin Care Kit.webp" },
+      { id: 5, name: "Self Help Book", price: 199, description: "Inspiring self help book for personal growth and development.", category: "Books", brand: "MotivateMe", image: "Self Help Book.jpg" },
+      { id: 6, name: "Smartphone", price: 19999, description: "Latest smartphone with advanced features and 5G connectivity.", category: "Electronics", brand: "TechMaster", image: "Smartphone.jpg" },
+      { id: 7, name: "Gaming Mouse", price: 599, description: "High-performance gaming mouse with customizable buttons and ergonomic design.", category: "Gaming", brand: "GamingGear", image: "Gaming Mouse.jpg" },
+      { id: 8, name: "Backpack", price: 1099, description: "Durable and stylish backpack for school or travel.", category: "Luggage", brand: "AdventureGear", image: "backpack.jpg" },
+      { id: 9, name: "Wrist Watch", price: 1299, description: "Stylish and functional wrist watch with date and time display.", category: "Accessories", brand: "WatchMaster", image: "Wrist Watch.jpg" },
+      { id: 10, name: "Yoga Mat", price: 499, description: "High-quality yoga mat for comfortable and safe practice.", category: "Fitness", brand: "YogaPro", image: "Yoga Mat.jpg" },
+      { id: 11, name: "Bluetooth Speaker", price: 2499, description: "Portable and waterproof Bluetooth speaker with long battery life.", category: "Electronics", brand: "SoundTech", image: "Bluetooth Speaker.webp" },
+      { id: 12, name: "Sunglasses", price: 199, description: "Stylish and protective sunglasses for outdoor activities.", category: "Accessories", brand: "SunGuard", image: "sunglasses.jpg" },
+      { id: 13, name: "Laptop Stand", price: 999, description: "Ergonomic and adjustable laptop stand for comfortable working.", category: "Electronics", brand: "TechStand", image: "Laptop Stand.jpg" },
+      { id: 14, name: "Digital Camera", price: 16999, description: "High-quality digital camera with advanced features and long battery life.", category: "Electronics", brand: "CamMaster", image: "Digital Camera.jpg" },
+      { id: 15, name: "Fitness Tracker", price: 3999, description: "Advanced fitness tracker with heart rate monitoring and long battery life.", category: "Fitness", brand: "FitPro", image: "Fitness Tracker.webp" },
+      { id: 16, name: "Notebook Set", price: 20, description: "Set of high-quality notebooks with various colors and designs.", category: "Office Supplies", brand: "NoteMaster", image: "Notebook Set.jpg" },
+      { id: 17, name: "Office Chair", price: 6999, description: "Ergonomic and adjustable office chair for comfortable working.", category: "Furniture", brand: "ChairMaster", image: "Office Chair.webp" },
+      { id: 18, name: "Sneakers", price: 1299, description: "High-quality sneakers with advanced features and comfortable design.", category: "Footwear", brand: "ShoeMaster", image: "Sneakers.jpg" },
+      { id: 19, name: "LED Desk Lamp", price: 299, description: "Energy-efficient LED desk lamp with adjustable brightness.", category: "Home Appliance", brand: "LampPro", image: "LED Desk Lamp.webp" },
+      { id: 20, name: "Wireless Charger", price: 799, description: "Fast and efficient wireless charger for your devices.", category: "Electronics", brand: "ChargeMaster", image: "Wireless Charger.webp" },
+      { id: 21, name: "Hand Mixer", price: 1999, description: "Easy-to-use hand mixer for various baking tasks.", category: "Kitchen Appliance", brand: "MixMaster", image: "Hand Mixer.webp" },
+      { id: 22, name: "Men's Wallet", price: 399, description: "Stylish and durable men's wallet made of premium leather.", category: "Accessories", brand: "WalletPro", image: "Men's Wallet.webp" },
+      { id: 23, name: "Electric Toothbrush", price: 2399, description: "Professional electric toothbrush with multiple cleaning modes.", category: "Beauty", brand: "ToothMaster", image: "Electric Toothbrush.webp" },
+      { id: 24, name: "Hair Dryer", price: 599, description: "Fast and efficient hair dryer with adjustable heat settings.", category: "Beauty", brand: "DryMaster", image: "Hair Dryer.webp" },
+      { id: 25, name: "Table Clock", price: 99, description: "Simple and elegant table clock for your desk or nightstand.", category: "Home Appliance", brand: "ClockMaster", image: "Table Clock.webp" }
+    ];
+
+    function displayCartPaymentForm(cart) {
+      const box = document.getElementById("paymentBox");
+      let totalAmount = 0;
+
+      let itemsHTML = '<h2>Your Cart Items</h2>';
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.price * item.quantity;
+          totalAmount += itemTotal;
+          itemsHTML += `
+            <div class="cart-item">
+              <div class="cart-item-name">${product.name}</div>
+              <div class="cart-item-qty">Quantity: ${item.quantity}</div>
+              <div>Price: ₹${product.price.toFixed(2)}</div>
+              <div>Total: ₹${itemTotal.toFixed(2)}</div>
+            </div>
+          `;
+        }
+      });
+
+      itemsHTML += `<div class="cart-total">Grand Total: ₹${totalAmount.toFixed(2)}</div>`;
+
+      itemsHTML += `
+        <div class="payment-methods">
+          <h3>Select Payment Method:</h3>
+          <label>
+            <input type="radio" name="method" value="card" checked />
+            Credit Card
+          </label>
+          <label>
+            <input type="radio" name="method" value="upi" />
+            UPI
+          </label>
+          <label>
+            <input type="radio" name="method" value="cod" />
+            Cash on Delivery
+          </label>
+        </div>
+
+        <div id="paymentDetails" style="margin-top: 15px; text-align: left;">
+          <label for="cardNumber" id="cardLabel" style="display: block;">
+            Card Number:
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number" style="width: 100%; padding: 8px; margin-top: 5px;"/>
+          </label>
+          <label for="upiId" id="upiLabel" style="display: none;">
+            UPI ID:
+            <input type="text" id="upiId" name="upiId" placeholder="Enter UPI ID or scan QR" style="width: 100%; padding: 8px; margin-top: 5px;"/>
+          </label>
+          <p id="codMessage" style="display: none; font-style: italic; color: #555;">
+            You will pay in cash upon delivery.
+          </p>
+        </div>
+
+        <button class="btn-confirm" onclick="confirmCartPayment()">Confirm Payment</button>
+      `;
+
+      box.innerHTML = itemsHTML;
+
+      // Add event listeners for payment method change
+      const methodRadios = box.querySelectorAll('input[name="method"]');
+      const cardLabel = box.querySelector('#cardLabel');
+      const upiLabel = box.querySelector('#upiLabel');
+      const codMessage = box.querySelector('#codMessage');
+
+      function updatePaymentDetails() {
+        const selected = box.querySelector('input[name="method"]:checked').value;
+        if (selected === 'card') {
+          cardLabel.style.display = 'block';
+          upiLabel.style.display = 'none';
+          codMessage.style.display = 'none';
+        } else if (selected === 'upi') {
+          cardLabel.style.display = 'none';
+          upiLabel.style.display = 'block';
+          codMessage.style.display = 'none';
+        } else if (selected === 'cod') {
+          cardLabel.style.display = 'none';
+          upiLabel.style.display = 'none';
+          codMessage.style.display = 'block';
+        }
+      }
+
+      methodRadios.forEach(radio => {
+        radio.addEventListener('change', updatePaymentDetails);
+      });
+
+      // Initialize display
+      updatePaymentDetails();
+    }
+
+    function displayPaymentForm(product) {
+      const box = document.getElementById("paymentBox");
+
+      box.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h2>${product.name}</h2>
+        <p>Price: <span class="highlight">₹${product.price.toFixed(2)}</span></p>
+
+        <div class="payment-methods">
+          <h3>Select Payment Method:</h3>
+          <label>
+            <input type="radio" name="method" value="card" checked />
+            Credit Card
+          </label>
+          <label>
+            <input type="radio" name="method" value="upi" />
+            UPI
+          </label>
+          <label>
+            <input type="radio" name="method" value="cod" />
+            Cash on Delivery
+          </label>
+        </div>
+
+        <div id="paymentDetails" style="margin-top: 15px; text-align: left;">
+          <!-- Dynamic payment inputs will appear here -->
+          <label for="cardNumber" id="cardLabel" style="display: block;">
+            Card Number:
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number" style="width: 100%; padding: 8px; margin-top: 5px;"/>
+          </label>
+          <label for="upiId" id="upiLabel" style="display: none;">
+            UPI ID:
+            <input type="text" id="upiId" name="upiId" placeholder="Enter UPI ID or scan QR" style="width: 100%; padding: 8px; margin-top: 5px;"/>
+          </label>
+          <p id="codMessage" style="display: none; font-style: italic; color: #555;">
+            You will pay in cash upon delivery.
+          </p>
+        </div>
+
+        <button class="btn-confirm" onclick="confirmPayment(${product.id})">
+          Confirm Payment
+        </button>
+      `;
+
+      // Add event listeners for payment method change
+      const methodRadios = box.querySelectorAll('input[name="method"]');
+      const cardLabel = box.querySelector('#cardLabel');
+      const upiLabel = box.querySelector('#upiLabel');
+      const codMessage = box.querySelector('#codMessage');
+
+      function updatePaymentDetails() {
+        const selected = box.querySelector('input[name="method"]:checked').value;
+        if (selected === 'card') {
+          cardLabel.style.display = 'block';
+          upiLabel.style.display = 'none';
+          codMessage.style.display = 'none';
+        } else if (selected === 'upi') {
+          cardLabel.style.display = 'none';
+          upiLabel.style.display = 'block';
+          codMessage.style.display = 'none';
+        } else if (selected === 'cose') {
+          cardLabel.style.display = 'none';
+          upiLabel.style.display = 'none';
+          codMessage.style.display = 'block';
+        }
+      }
+
+      methodRadios.forEach(radio => {
+        radio.addEventListener('change', updatePaymentDetails);
+      });
+
+      // Initialize display
+      updatePaymentDetails();
+    }
+
+    function confirmCartPayment() {
+      const method = document.querySelector('input[name="method"]:checked').value;
+      const cart = JSON.parse(sessionStorage.getItem("cartForPayment")) || [];
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+      const totalAmount = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return product ? sum + product.price * item.quantity : sum;
+      }, 0);
+
+      // Save payment data in sessionStorage
+      sessionStorage.setItem("paymentAmount", totalAmount.toFixed(2));
+      sessionStorage.setItem("paymentData", JSON.stringify({ method, items: cart }));
+
+      // Clear cartForPayment after confirming payment
+      sessionStorage.removeItem("cartForPayment");
+
+      // Redirect to a “thank you” or confirmation page
+      window.location.href = "confirm-payment.html";
+    }
+
+    function confirmPayment(productId) {
+      const method = document.querySelector('input[name="method"]:checked').value;
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      // Save payment data in sessionStorage
+      sessionStorage.setItem("paymentAmount", product.price.toFixed(2));
+      sessionStorage.setItem("paymentData", JSON.stringify({ method }));
+
+      // Redirect to a “thank you” or confirmation page
+      window.location.href = "confirm-payment.html";
+    }
+
+    function getProductIdFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("product");
+    }
+
+    window.onload = () => {
+      const cart = JSON.parse(sessionStorage.getItem("cartForPayment"));
+      if (cart && cart.length > 0) {
+        displayCartPaymentForm(cart);
+      } else {
+        const id = getProductIdFromURL();
+        if (!id) {
+          const box = document.getElementById("paymentBox");
+          box.innerHTML = `<p style="font-size:18px; text-align:center; color:#888;">No product or cart found for payment.</p>`;
+          return;
+        }
+        const prod = products.find(p => p.id === parseInt(id));
+        if (prod) {
+          displayPaymentForm(prod);
+        } else {
+          const box = document.getElementById("paymentBox");
+          box.innerHTML = `<p style="font-size:18px; text-align:center; color:#888;">Product not found.</p>`;
+        }
+      }
+    };
+  </script>
+  <div id="footer"></div>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>eShop - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30') center/cover no-repeat;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55); /* dark overlay */
+      z-index: 0;
+    }
+
+    .hero h2,
+    .hero p,
+    .hero .btn {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 25px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    /* SHOP NOW BUTTON */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.5s ease;
+    }
+
+    .btn:hover::after {
+      left: 100%;
+    }
+
+    /* BUTTON ICON */
+    .btn i {
+      font-size: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 28px;
+      }
+      .hero p {
+        font-size: 16px;
+      }
+      .btn {
+        font-size: 16px;
+        padding: 12px 24px;
+      }
+    }
+  </style>
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <section class="hero">
+    <h2>Your One-Stop Online Store</h2>
+    <p>Discover the best deals on gadgets, fashion, and more!</p>
+    <a class="btn" href="products.html">
+      <i class="fas fa-shopping-cart"></i> Shop Now
+    </a>
+  </section>
+
+  <script>
+    // Check if user is logged in
+    const userEmail = localStorage.getItem('loggedInUser');
+    if (!userEmail) {
+      alert("You must login first.");
+      window.location.href = "login.html";
+    } else {
+      const emailElem = document.getElementById('userEmail');
+      if (emailElem) {
+        emailElem.innerText = "Logged in as: " + userEmail;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'login.html';
+    }
+  </script>
+
+  <div id="footer"></div>
+  <script src="index.js"></script>
+</body>
+</html>

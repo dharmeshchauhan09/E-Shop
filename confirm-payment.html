@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirm Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("confirm-payment.jpg") center/cover no-repeat;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      color: #374151;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #ef8f00;
+    }
+
+    .btn-back {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #febd69;
+      color: #232f3e;
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #ff9900;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Thank You for Your Payment!</h2>
+    <p id="amount">Amount: <span class="highlight">₹0</span></p>
+    <p id="paymentMethod">Payment Method: <span class="highlight">N/A</span></p>
+    <p id="transactionId">Transaction ID: <span class="highlight">N/A</span></p>
+
+    <a href="index.html" class="btn-back">Back to Home</a>
+  </main>
+
+  <script>
+  // Generate a random transaction ID
+  function generateTransactionId() {
+    return '#TXN' + Math.floor(Math.random() * 1000000000);
+  }
+
+  // Display payment details on page
+  function displayPaymentDetails() {
+    const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
+    const cartTotal = sessionStorage.getItem('paymentAmount'); // Amount saved during payment process
+
+    // If paymentAmount is not set in sessionStorage, fallback to 0
+    const totalAmount = cartTotal ? parseFloat(cartTotal).toFixed(2) : '0.00';
+
+    document.getElementById('amount').innerHTML = `Amount: <span class="highlight">₹${totalAmount}</span>`;
+
+    let methodText = 'Unknown';
+    if (paymentData) {
+      if (paymentData.method === 'card') methodText = 'Credit Card';
+      else if (paymentData.method === 'upi') methodText = 'UPI';
+      else if (paymentData.method === 'cod') methodText = 'Cash on Delivery';
+    }
+
+    document.getElementById('paymentMethod').innerHTML = `Payment Method: <span class="highlight">${methodText}</span>`;
+    document.getElementById('transactionId').innerHTML = `Transaction ID: <span class="highlight">${generateTransactionId()}</span>`;
+
+    // Clear sessionStorage data (cart is already cleared on payment page)
+    sessionStorage.removeItem('paymentData');
+    sessionStorage.removeItem('paymentAmount');
+  }
+
+  window.onload = displayPaymentDetails;
+</script>
+
+</body>
+</html>
